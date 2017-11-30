@@ -24,16 +24,18 @@ If you do not want to drop queries, set timeout as 0.
 
 ntped can retry Sync() when all the queries are dropped.
 ```go
-err := ntped.Sync(3, 2000) // retry Sync() maximum three times. (i.e., Sync() is called 4 times, in maximum)
+err := ntped.Sync(3, 2000) // retry Sync() maximum three times
 ```
-On each try(n), Sync() increase timeout(t(n)) lienearly, t(n) = n * t.
+On each try(n), Sync() increase timeout(t(n)) lienearly, t(n) = n * t.<br>
 For example, when you set timeout(t) as 2000 (2 seconds), timeouts are
-* 1st retry: 4000
-* 2nd retry: 6000
-* 3rd retry: 8000
+* initial try: 2000
+* 1st retry:   4000
+* 2nd retry:   6000
+* 3rd retry:   8000
 
 <br>
 If you are not satisfied with Unix() and UnixNano(), you can use UnixMilli() for ntped time.
+
 ```go
 err := ntped.Sync(0, 0)
 ms := ntped.UnixMilli() // ntped.Now() in milli seconds (int64)
