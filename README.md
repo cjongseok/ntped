@@ -13,7 +13,7 @@ To obtain current ntped time, sync with clocks in pool.ntp.org first.
 err := ntped.Sync(0, 0)
 time := ntped.Now()     // NTPed time in time.Time
 ```
-Sync() queries time offsets (NTP_server_time - your_machine_time) to NTP servers.<br>
+Sync() queries time offsets(NTP_server_time - your_machine_time) to NTP servers.<br>
 Now() returns median_offset + your_machine_time.
 
 Sometimes querying to NTP pool takes time. Drop time consuming NTP servers by timeout.
@@ -34,7 +34,7 @@ For example, when you set timeout(t) as 2000 (2 seconds), timeouts are
 * 3rd retry:   8000
 
 <br>
-If you are not satisfied with Unix() and UnixNano(), you can use UnixMilli() for ntped time.
+If you are not satisfied with Now(), you can use UnixMilli() instead.
 
 ```go
 err := ntped.Sync(0, 0)
