@@ -1,8 +1,6 @@
 ntped
 =====
-NTPed time with pool.ntp.org.
-
-ntped gets time offsets from below NTP server,
+ntped gets time offsets from below NTP servers,
 * asia.pool.ntp.org
 * euroupe.pool.ntp.org
 * north-america.pool.ntp.org
@@ -15,6 +13,8 @@ To obtain current ntped time, sync with clocks in pool.ntp.org first.
 err := ntped.Sync(0, 0)
 time := ntped.Now()     // NTPed time in time.Time
 ```
+Sync() queries time offsets (NTP_server_time - your_machine_time) to NTP servers.<br>
+Now() returns median_offset + your_machine_time.
 
 Sometimes querying to NTP pool takes time. Drop time consuming NTP servers by timeout.
 ```go
