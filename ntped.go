@@ -6,6 +6,7 @@ import (
 	"sort"
 	"fmt"
 	"sync"
+	"log"
 )
 
 type int64s []int64
@@ -35,10 +36,22 @@ func UnixMilli() int64 {
 func Sync(maxNtpRetry int, timeoutInMs int) error {
 	// NTP pool
 	ntpPool := [...]string{
-		"asia.ntp.org",
-		"europe.pool.ntp.org",
-		"north-america.pool.ntp.org",
-		"oceania.pool.ntp.org",
+		"0.asia.ntp.org",
+		"1.asia.ntp.org",
+		"2.asia.ntp.org",
+		"3.asia.ntp.org",
+		"0.europe.pool.ntp.org",
+		"1.europe.pool.ntp.org",
+		"2.europe.pool.ntp.org",
+		"3.europe.pool.ntp.org",
+		"0.north-america.pool.ntp.org",
+		"1.north-america.pool.ntp.org",
+		"2.north-america.pool.ntp.org",
+		"3.north-america.pool.ntp.org",
+		"0.oceania.pool.ntp.org",
+		"1.oceania.pool.ntp.org",
+		"2.oceania.pool.ntp.org",
+		"3.oceania.pool.ntp.org",
 	}
 
 	// Get offset from servers
@@ -46,10 +59,11 @@ func Sync(maxNtpRetry int, timeoutInMs int) error {
 	var ntpTry int
 	for ntpTry = 0; ntpTry <= maxNtpRetry; ntpTry++ {
 		// Linear timeout increment
-		timeout := time.Duration(int64(ntpTry) * int64(timeoutInMs) * time.Millisecond.Nanoseconds())
+		timeout := time.Duration(int64(ntpTry+1) * int64(timeoutInMs) * time.Millisecond.Nanoseconds())
 		options := ntp.QueryOptions{Timeout: timeout}
 		joinNtps := sync.WaitGroup{}
 		respCh := make(chan *ntp.Response)
+		//respCh := make(chan *ntp.Response, len(ntpPool))
 		for _, ntpAddr := range ntpPool {
 			joinNtps.Add(1)
 			go func(out chan<- *ntp.Response) {
