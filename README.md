@@ -1,10 +1,13 @@
 ntped
 =====
-ntped gets time offsets from below NTP servers,
-* asia.pool.ntp.org
-* euroupe.pool.ntp.org
-* north-america.pool.ntp.org
-* oceania.pool.ntp.org
+ntped gets time offsets from 16 NTP servers,
+* 0.asia.pool.ntp.org ~ 3.asia.pool.ntp.org
+* 0.europe.pool.ntp.org ~ 3.europe.pool.ntp.org
+* 0.oceania.pool.ntp.org ~ 3.oceania.pool.ntp.org
+* 0.north-america.pool.ntp.org ~ 3.north-america.pool.ntp.org
+
+Each zone is supported by at least 100+ servers, respectively.<br>
+You can check current pool size here, http://www.pool.ntp.org/zone/@.
 
 Usage
 ----
