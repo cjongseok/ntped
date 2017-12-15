@@ -6,7 +6,6 @@ import (
 	"sort"
 	"fmt"
 	"sync"
-	"log"
 )
 
 type int64s []int64
