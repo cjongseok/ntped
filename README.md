@@ -29,12 +29,12 @@ ntped can retry Sync() when all the queries are dropped.
 ```go
 err := ntped.Sync(3, 2000) // retry Sync() maximum three times
 ```
-On each try(n), Sync() increases timeout lienearly, t(n) = t * (n + 1).<br>
-For example, when you set the initial timeout t as 2000 (2 seconds), timeouts are
-* initial try: 2000
-* 1st retry:   4000
-* 2nd retry:   6000
-* 3rd retry:   8000
+On each try, Sync() linearly increases timeout, t(n) = t * (n + 1), where *t* is the initial timeout and *n* is the retry number.<br>
+In the above example, ```ntped.Sync(3, 2000)```, query timeouts are:
+* initial try (n = 0): 2s
+* 1st retry   (n = 1): 4s
+* 2nd retry   (n = 2): 6s
+* 3rd retry   (n = 3): 8s
 
 <br>
 If you are not satisfied with Now(), you can use UnixMilli() instead.
