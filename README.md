@@ -14,7 +14,7 @@ Usage
 To obtain current ntped time, sync with clocks in pool.ntp.org first.
 ```go
 err := ntped.Sync(0, 0)
-time := ntped.Now()     // NTPed time in time.Time
+now := ntped.Now()     // NTPed time in time.Time
 ```
 Sync() queries time offsets(NTP_server_time - your_machine_time) to NTP servers.<br>
 Now() returns median_offset + your_machine_time.
@@ -29,8 +29,8 @@ ntped can retry Sync() when all the queries are dropped.
 ```go
 err := ntped.Sync(3, 2000) // retry Sync() maximum three times
 ```
-On each try(n), Sync() increase timeout(t(n)) lienearly, t(n) = n * t.<br>
-For example, when you set timeout(t) as 2000 (2 seconds), timeouts are
+On each try(n), Sync() increases timeout lienearly, t(n) = t * (n + 1).<br>
+For example, when you set the initial timeout t as 2000 (2 seconds), timeouts are
 * initial try: 2000
 * 1st retry:   4000
 * 2nd retry:   6000
